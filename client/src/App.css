@@ -1,3 +1,9 @@
+
+  body,html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+  }
+
 .App {
   text-align: center;
   font-family: monospace;
@@ -36,5 +42,3 @@
   font-size: 18px;
   color: inherit;
 }
-
-

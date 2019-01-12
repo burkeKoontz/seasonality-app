@@ -1,0 +1,35 @@
+.announce {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.announce-textarea {
+    height: 40vh;
+    width: 60vw;
+}
+
+.submit-button {
+    margin-left: 10px;
+    margin-top: -37px;
+    -webkit-font-smoothing: antialiased;
+    appearance: none;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 2px solid  #282c34;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1;
+    outline: none;
+    padding: 15px 21px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.submit-button:hover {
+    background-color: #282c34;
+    color: white;
+}
