@@ -1,20 +1,20 @@
-Seasonality app, a team 12 production
+# 🌱 SEEDSonal Planner 🥦
 
+# Description
 
+As part of the We Code for Good 2019 Hackathon event, our team choose to build an app to help the non-profit [Growing Gardens](www.growing-gardens.org).
 
-# THIS IS AN OPTIONAL STARTER-KIT. USE WHICHEVER LANGUAGES AND FRAMEWORKS MAKES YOUR <3 GO BOOP!
+This app is a Seedsonal planner that is an app that lets users search by date and crop type to find details on what to plant and when to plant it. 
 
-# About the App
+****Notifications!** One benefit of this app is the ability of a Growing Gardens admin to set up custom browser push notifications. 
 
-Here is a quick way to start your hackathon project with a simple node server and React app, ready for your UI enhancements and/or database connections. It's a To Do list, in which you can add a To Do item via the form field, and it will be posted to the Express server.
+## Project structure
 
-You can mark a To Do item as done by checking the box next to it.
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and Esau Silva's article on [How to get create-react-app to work with a Node.js back-end API](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0). Silva's article and comments may be a useful resource if you run into trouble, and it contains additional instructions on deploying a similar app to Heroku. This is optional but could be helpful when it's time to submit the project.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and Esau Silva's article on [How to get create-react-app to work with a Node.js back-end API](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0). Silva's article and comments may be a useful resource if you run into trouble, and it contains additional instructions on deploying a similar app to Heroku. 
 
 ## Required tools
 
-If you don't already have these tools, download and install them before you start working with the Apparel Store app.
+If you don't already have these tools, download and install them before you start working with the Seedsonal Planner app.
 
 - Modern web browser (may we suggest [Chrome?](https://www.google.com/chrome/browser))
 - Command Line Interface (CLI)
@@ -26,11 +26,9 @@ If you don't already have these tools, download and install them before you star
 
 ## Getting Started
 
-First, fork this repo: https://guides.github.com/activities/forking/. Just log into your Github account, and then hit Fork (next to the Watch and Star buttons on the top right), and then clone from your own fork of the repo.
+First, clone this repo to your local machine.
 
 Once you have all prerequisites installed, open your CLI and navigate to the project folder.
-
-_New to command line?_ Navigate to the project folder using `cd` (which stands for change directory). If you know the full path of the directory you can type it in, or you can click and drag the folder over to your CLI window and it will automatically fill in the path to that folder.
 
 ```
 cd /Users/mycomp/Documents/kickstart-js
@@ -77,11 +75,10 @@ kickstart-js
     │   ├── App.css
     │   ├── App.js
     │   ├── App.test.js
-    |   ├── ListItem.css
-    │   ├── ListItem.js
+    |   ├── Announce.js
+    │   ├── Home.js
     │   ├── index.css
     │   ├── index.js
-    │   ├── logo.svg
     │   └── serviceWorker.js
     ├── public
     │   ├── favicon.ico
