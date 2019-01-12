@@ -58,6 +58,11 @@ class Banner extends Component {
             let message = document.getElementById("message");
             message.innerHTML = payload.notification.body;
             banner.style.display = "table";
+
+            setTimeout(function(){
+                banner.style.display = "none";
+
+            }, 10000);
         });
     }
 
