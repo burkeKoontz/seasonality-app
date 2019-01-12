@@ -22,7 +22,6 @@ class App extends Component {
                     <img src={Bell} className="bell" />
                     <a href="/admin" className="admin-link">Admin</a>
                 </header>
-
                 <Route exact path="/" component={Home} />
                 <Route path="/announce" component={Announce} />
             </div>
