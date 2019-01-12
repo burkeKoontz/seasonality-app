@@ -13,27 +13,6 @@ const Plant = require('./models/plants');
 
 let mongoose = require('mongoose');
 
-function queryDatabase(sql) {
-  mongoose.connect("mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app", function(err, db) {
-    if (err) throw err;
-    console.log("Connected!");
-
-    sql.exec(function (err, plants) {
-      if (err) throw err;
-      console.log(plants);
-    });
-  });
-};
-
-function cropsAsOfDay(date) {
-  mongoose.connect("mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app", function(err, db) {
-    if (err) throw err;
-    console.log("Connected!");
-
-    Plant.find().then(response => res.json(response));//.where(date).gt('plantStart').lt('plantEnd');
-  //return queryDatabase(sql);
-})};
-
 function cropsByName(crop) {
   let sql = Plant.find({ "name": /${crop}/i });
   return queryDatabase(sql);
@@ -46,16 +25,16 @@ app.get('/api/home', (req, res) => {
   mongoose.connect("mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app", function(err, db) {
     if (err) throw err;
     console.log("Connected!");
+  })
 
-    //Plant.find().then(response => res.json(response));//.where(date).gt('plantStart').lt('plantEnd');
-  //return queryDatabase(sql);
-})
-
-  console.log(req.query.searchType);
   if(!searchText || searchText === ''){
-    var date = new Date();
+    var today = new Date();
+    var date = today.getMonth() + 6;
     console.log(date);
-    Plant.find()//.where(date).gt('plantStart').lt('plantEnd')
+    if(today.getDate > 14){
+      date += 0.5;
+    };
+    Plant.find()//.where('plantStart').lte(date).where('plantEnd').gte(date)
       .then(response => {
       console.log(response);
       res.json(response);
