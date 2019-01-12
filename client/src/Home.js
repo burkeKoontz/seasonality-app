@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+import fetch from 'node-fetch'
 
 class Home extends Component {
 
@@ -25,7 +26,28 @@ class Home extends Component {
             console.log('Notification permission granted.');
             const token = messaging.getToken();
 
-            console.log('dat token', token);
+            messaging.getToken().then(function(result){
+                console.log(result);
+
+                localStorage.setItem('pushToken', result);
+
+                let resp = fetch('http://localhost:3000/api/subtopic', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': 'key=AAAAwDyW1Bo:APA91bHQbOnDKK9GTX0xd8-3fiEmZXiiWGib6-uh_sfasgIZ7J3vRn6QoaDiMvGT40eRUQydmtJpbOT2dCjjej6cQX42oovf4yYfWOkUdHgnlBiqxw4h8tA5sNI1YW8Qj8ZrVB_ailn1'
+                    },
+                    body: JSON.stringify({
+                        token: result
+                    })
+                });
+
+                resp.then(function(result){
+                    console.log(result);
+                })
+            });
+
         }).catch(function(err) {
             console.log('Unable to get permission to notify.', err);
         });
