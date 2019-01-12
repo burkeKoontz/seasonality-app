@@ -1,3 +1,7 @@
+Seasonality app, a team 12 production
+
+
+
 # THIS IS AN OPTIONAL STARTER-KIT. USE WHICHEVER LANGUAGES AND FRAMEWORKS MAKES YOUR <3 GO BOOP!
 
 # About the App
