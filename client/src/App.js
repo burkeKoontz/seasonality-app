@@ -61,7 +61,7 @@ class App extends Component {
         messaging.onMessage(function(payload) {
             console.log('Message received. ', payload);
 
-            alert('whats up yo')
+            alert(payload.notification.body);
         });
     }
 
