@@ -53,7 +53,7 @@ app.get('/api/home', (req, res) => {
   let searchText = req.query.searchText;
   let date = req.query.date;
 
-
+  console.log(date);
   if (searchText) {
     Plant.find({name: searchText})
       .then(response => {

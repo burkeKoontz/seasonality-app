@@ -8,7 +8,7 @@ class Home extends Component {
     super(props);
     this.state = {
       plants : [],
-      searchBar: ''
+      searchBar: '',
     }
   }
 
@@ -35,42 +35,76 @@ class Home extends Component {
       })
   }
 
-  search(event) {
+  searchDate(event) {
     event.preventDefault();
-    fetch(`${API_BASE_URL}/home`, {
+    let date = document.getElementById("date").value ;
+    date = new Date( date )
+    let month = date.getMonth() + 1;
+    let decimal = date.getDate();
+    decimal = decimal / 30;
+    date = month + decimal;
+    fetch(`${API_BASE_URL}/home?date=${date}`, {
       method: "GET"
     })
       .then(res => {
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }
-        console.log(res);
+        return res.json()
       })
+      .then(res =>
+        this.setState({plants: res})
+      )
       .catch(err => {
         console.error(err);
       });
   }
 
- 
+  // searchText(event) {
+  //   event.preventDefault();
+  //   let seachTextInput;
+  //   fetch(`${API_BASE_URL}/home?searchText=${searchTextInput}`, {
+  //     method: "GET"
+  //   })
+  //     .then(res => {
+  //       if (!res.ok) {
+  //           return Promise.reject(res.statusText);
+  //       }
+  //       console.log(res);
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     });
+  // }
+
 
   render() {
     let listHTML;
+
+    const image = {
+      width: '100px',
+      height: '100px'
+    };
+
+
     if (this.state.plants.length) {
       listHTML = this.state.plants.map((item, index) => {
-        return <li key={index}><p>Name : {item.name}</p></li>
+        console.log(item.image);
+        return <li key={index}><p>Name : {item.name}</p><img style={image} src={item.image} /></li>
       })
     }
 
     return (
         <div className="Home">
-            <form onSubmit={(e) => this.search(e)}>
-            <input type="radio" id="searchText" name="searchBy" value="By Plant" defaultChecked></input>
-            <label htmlFor="searchText">By Plant</label>
-            <input type="radio" id="date" name="searchBy" value="By Date"></input>
-            <label htmlFor="date">By Date</label>
-            <label htmlFor="searchBar"></label>
-            <input onChange={(e) => this.setInput(e.target.value)} id="searchBar" type="text"></input>
-            <button>Search</button>
+            <form onSubmit={(e) => this.searchDate(e)}>
+              <label htmlFor="date">Search by Date</label>
+              <input type="date" id="date" name="searchBy"></input>
+              <button>Search</button>
+            </form>
+            <form onSubmit={(e) => this.searchPlant(e)}>
+              <label htmlFor="searchBar">Search by Plant Name</label>
+              <input id="searchBar" type="text"></input>
+              <button>Search</button>
             </form>
             <ul>
               {listHTML}
