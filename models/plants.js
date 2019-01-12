@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const plantSchema = new mongoose.Schema({
   name: {type: String, required: true},
   image: {type: String, default: '/test'},
-  plantStart: {type: Date},
-  plantEnd: {type: Date}
+  plantStart: {type: Number},
+  plantEnd: {type: Number}
 });
 
 plantSchema.set('toObject', {

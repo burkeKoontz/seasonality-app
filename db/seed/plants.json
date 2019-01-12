@@ -3,49 +3,49 @@
     "_id" :       "444444444444444444444000",
     "name" :       "Broccoli",
     "image" : "/image/broccoli.png",
-    "plantStart": "2019-03-01T00:00:00.000Z",
-    "plantEnd" : "2019-08-31T00:00:00.000Z"
+    "plantStart": 3,
+    "plantEnd" : 9
   },
   {
     "_id" :       "444444444444444444444001",
     "name" :       "Peas",
     "image" : "/image/peas.png",
-    "plantStart": "2019-02-01T00:00:00.000Z",
-    "plantEnd" : "2019-05-31T00:00:00.000Z"
+    "plantStart": 2,
+    "plantEnd" : 6
   },
   {
     "_id" :       "444444444444444444444002",
     "name" :       "Chives",
     "image" : "/image/chives.png",
-    "plantStart": "2019-05-01T00:00:00.000Z",
-    "plantEnd" : "2019-08-31T00:00:00.000Z"
+    "plantStart": 5,
+    "plantEnd" : 9
   },
   {
     "_id" :       "444444444444444444444003",
     "name" :       "Lettuce",
     "image" : "/image/lettuce.png",
-    "plantStart": "2019-04-01T00:00:00.000Z",
-    "plantEnd" : "2019-07-31T00:00:00.000Z"
+    "plantStart": 4,
+    "plantEnd" : 8
   },
   {
     "_id" :       "444444444444444444444004",
     "name" :       "Rutabaga",
     "image" : "/image/rutabaga.png",
-    "plantStart": "2019-07-15T00:00:00.000Z",
-    "plantEnd" : "2019-07-31T00:00:00.000Z"
+    "plantStart": 7.5,
+    "plantEnd" : 8
   },
   {
     "_id" :       "444444444444444444444005",
     "name" :       "Radish",
     "image" : "/image/radish.png",
-    "plantStart": "2019-03-01T00:00:00.000Z",
-    "plantEnd" : "2019-09-30T00:00:00.000Z"
+    "plantStart": 3,
+    "plantEnd" : 10
   },
   {
     "_id" :       "444444444444444444444006",
     "name" :       "Onions",
     "image" : "/image/yellowonion.png",
-    "plantStart": "2019-03-01T00:00:00.000Z",
-    "plantEnd" : "2019-05-31T00:00:00.000Z"
+    "plantStart": 3,
+    "plantEnd" : 6
   }
 ]

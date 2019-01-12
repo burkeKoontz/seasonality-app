@@ -3,6 +3,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -12,6 +13,12 @@ const { dbConnect } = require('./db-mongoose');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+);
 
 let mongoose = require('mongoose');
 
@@ -53,15 +60,20 @@ app.get('/api/home', (req, res) => {
   //return queryDatabase(sql);
   });
 
+  // //{region: "NA",sector:"Some Sector"}
+
   console.log(req.query.searchType);
   if(!searchText || searchText === ''){
-    var date = new Date();
+    var date = 8.5;
     console.log(date);
-    Plant.find()//.where(date).gt('plantStart').lt('plantEnd')
+    // date should be less th
+    // { plantStart: { $gt: 20 } }
+    Plant.find({$and : [{plantStart: { $lte: date }}, {plantEnd: { $gte: date }}]})
       .then(response => {
         console.log(response);
         res.json(response);
-      }).catch(err => console.error(err));
+      })
+      .catch(err => console.error(err));
   }
   else if(req.query.searchType === 'date'){
     console.log('Searching by date');
@@ -75,21 +87,9 @@ app.get('/api/home', (req, res) => {
 app.post('/api/addItem', (req, res) => {
   // displays in the terminal
   console.log(req.body);
-  crops.push(req.body.post);
+  // crops.push(req.body.post);
   res.send('Item added!');
 });
-
-// if (process.env.NODE_ENV === 'production') {
-//   // Serve any static files
-//   app.use(express.static(path.join(__dirname, 'client/build')));
-
-//   // Handle React routing, return all requests to React app
-//   app.get('*', function(req, res) {
-//     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-//   });
-// }
-
-// app.listen(port, () => console.log(`Listening on port ${port}`));
 
 function runServer(port = PORT) {
   const server = app

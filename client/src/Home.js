@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import {API_BASE_URL} from '../config';
+import {API_BASE_URL} from './config';
 
 class Home extends Component {
 
   constructor(props) {
+    super(props);
     this.state = {
       plants : [],
       searchBar: ''
@@ -17,15 +18,18 @@ class Home extends Component {
 
   componentDidMount() {
     const date = new Date();
-    fetch(`${API_BASE_URL}/home?date=${date}`, {
+    fetch(`${API_BASE_URL}/home`, {
       method: "GET"
       })
       .then(res => {
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }
-        console.log(res);
+        return res.json()
       })
+      .then(res =>
+        this.setState({plants: res})
+      )
       .catch(err => {
         console.error(err);
       })
@@ -33,9 +37,9 @@ class Home extends Component {
 
   search(event) {
     event.preventDefault();
-    fetch(`${API_BASE_URL}/home?date=${date}`, {
+    fetch(`${API_BASE_URL}/home`, {
       method: "GET"
-      })
+    })
       .then(res => {
         if (!res.ok) {
             return Promise.reject(res.statusText);
@@ -44,8 +48,10 @@ class Home extends Component {
       })
       .catch(err => {
         console.error(err);
-      })
+      });
   }
+
+ 
 
   render() {
     let listHTML;
@@ -58,11 +64,11 @@ class Home extends Component {
     return (
         <div className="Home">
             <form onSubmit={(e) => this.search(e)}>
-            <input type="radio" id="searchText" name="searchBy" value="By Plant" checked="checked"></input>
-            <label for="searchText">By Plant</label>
+            <input type="radio" id="searchText" name="searchBy" value="By Plant" defaultChecked></input>
+            <label htmlFor="searchText">By Plant</label>
             <input type="radio" id="date" name="searchBy" value="By Date"></input>
-            <label for="date">By Date</label>
-            <label for="searchBar"></label>
+            <label htmlFor="date">By Date</label>
+            <label htmlFor="searchBar"></label>
             <input onChange={(e) => this.setInput(e.target.value)} id="searchBar" type="text"></input>
             <button>Search</button>
             </form>
