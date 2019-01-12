@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import Announce from './announce/Announce.js'
 import Home from './Home.js'
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom"
 import SproutLogo from './images/sprout-logo.png'
 import Bell from './images/bell.png'
+import Banner from './banner'
 import firebase from 'firebase';
 import fetch from 'node-fetch'
 
@@ -70,6 +71,7 @@ class App extends Component {
     return (
         <Router>
             <div className="App">
+                <Banner />
                 <header className="App-header">
                     <img src={SproutLogo} className="logo" />
                     <h1 className="title">Seedsonal Planner</h1>
