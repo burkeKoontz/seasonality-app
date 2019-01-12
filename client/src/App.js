@@ -48,13 +48,13 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>To Do List</h1>
+          <h1>Seedsonal Planner</h1>
         </header>
         <ul className="to-do-list">
        {this.state.list.length > 0 && this.state.list.map((listItem, index) => (
           <ListItem text={listItem} />
         ))}
-          
+
         </ul>
         <form onSubmit={this.handleSubmit}>
           <p>
