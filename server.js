@@ -59,7 +59,7 @@ app.get('/api/home', (req, res) => {
 app.post('/api/addItem', (req, res) => {
   // displays in the terminal
   console.log(req.body);
-  crops.push(req.body.post);
+  // crops.push(req.body.post);
   res.send('Item added!');
 });
 
