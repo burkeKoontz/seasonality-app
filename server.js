@@ -10,21 +10,44 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// To Do List / Faux data store
-let toDoList = [
-  'Create an awesome hackathon project!',
-  'Don\'t forget to take a break'
-];
+var MongoClient = require('mongodb').MongoClient;
+
+queryDatabase(function(sql) {
+  MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
+    if (err) throw err;
+    console.log("Connected!");
+    MongoClient.query(sql, function (err, result) {
+      if (err) throw err;
+      return result;
+    });
+  });
+});
+
+cropsAsOfDay(function(date) {
+  return queryDatabase("select 'name', 'plantStart', 'plantEnd' where ${date} >= 'plantStart' and ${date} <= 'plantEnd'");
+});
+
+cropsByName(function(crop) {
+  return queryDatabase("select 'name', 'plantStart', 'plantEnd' where 'name' like ${crop}")
+});
 
 // API calls
-app.get('/api/hello', (req, res) => {
-  res.send({ toDoList });
+app.get('/api/home', (req, res) => {
+  var date = new Date();
+  if(req.query.searchText == ''){
+    res.send({ cropsAsOfDay(date) });
+  }
+  if(req.query.searchType == 'date'){
+    res.send({ cropsAsOfDay(searchText) });
+  } else {
+    res.send({ cropsByName(searchText) });
+  }
 });
 
 app.post('/api/addItem', (req, res) => {
   // displays in the terminal
   console.log(req.body);
-  toDoList.push(req.body.post);
+  crops.push(req.body.post);
   res.send('Item added!');
 });
 
