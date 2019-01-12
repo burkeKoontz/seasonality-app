@@ -30,7 +30,7 @@ class App extends Component {
         messaging.usePublicVapidKey("BGq8Hpjffnqs-gCsFRTzzpaN-8Hohyrp5bWi5F5wOTHn0V8pN3WFd-Dn-IEKxsAjs6XSYiAvxGQ8RYUKqklbKlA");
         messaging.requestPermission().then(function() {
             console.log('Notification permission granted.');
-            const token = messaging.getToken();
+            // const token = messaging.getToken();
 
             messaging.getToken().then(function(result){
                 console.log(result);

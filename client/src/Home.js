@@ -6,7 +6,6 @@ class Home extends Component {
 
 
     render() {
-        this.setupFirebase();
         return (
             <div className="Home">
                 {/* TODO put what goes on the home page here */}
