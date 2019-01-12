@@ -10,25 +10,27 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var MongoClient = require('mongodb').MongoClient;
+let mongoose = require('mongoose');
 
 queryDatabase(function(sql) {
-  MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
+  mongoose.connect("mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app", function(err, db) {
     if (err) throw err;
     console.log("Connected!");
-    MongoClient.query(sql, function (err, result) {
+
+    sql.exec(function (err, plants) {
       if (err) throw err;
-      return result;
-    });
+    })
   });
 });
 
 cropsAsOfDay(function(date) {
-  return queryDatabase("select 'name', 'plantStart', 'plantEnd' where ${date} >= 'plantStart' and ${date} <= 'plantEnd'");
+  sql = Plant.find().where(date).gt('plantStart').lt('plantEnd');
+  return queryDatabase(sql);
 });
 
 cropsByName(function(crop) {
-  return queryDatabase("select 'name', 'plantStart', 'plantEnd' where 'name' like ${crop}")
+  sql = Plant.find({ "name": /${crop}/i });
+  return queryDatabase(sql);
 });
 
 // API calls
