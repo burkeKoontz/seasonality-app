@@ -32,6 +32,10 @@ cropsByName(function(crop) {
 });
 
 // API calls
+// possible calls
+// /api/home?date=&crop=broccoli
+// /api/home?date=11031994&crop=
+// /api/home?date=&crop=
 app.get('/api/home', (req, res) => {
   var date = new Date();
   if(req.query.searchText == ''){
