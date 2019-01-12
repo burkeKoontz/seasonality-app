@@ -9,40 +9,64 @@ const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+const Plant = require('./models/plants');
 
 let mongoose = require('mongoose');
 
-queryDatabase(function(sql) {
+function queryDatabase(sql) {
   mongoose.connect("mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app", function(err, db) {
     if (err) throw err;
     console.log("Connected!");
 
     sql.exec(function (err, plants) {
       if (err) throw err;
-    })
+      console.log(plants);
+    });
   });
-});
+};
 
-cropsAsOfDay(function(date) {
-  sql = Plant.find().where(date).gt('plantStart').lt('plantEnd');
-  return queryDatabase(sql);
-});
+function cropsAsOfDay(date) {
+  mongoose.connect("mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app", function(err, db) {
+    if (err) throw err;
+    console.log("Connected!");
 
-cropsByName(function(crop) {
-  sql = Plant.find({ "name": /${crop}/i });
+    Plant.find().then(response => res.json(response));//.where(date).gt('plantStart').lt('plantEnd');
+  //return queryDatabase(sql);
+})};
+
+function cropsByName(crop) {
+  let sql = Plant.find({ "name": /${crop}/i });
   return queryDatabase(sql);
-});
+};
 
 // API calls
 app.get('/api/home', (req, res) => {
-  var date = new Date();
-  if(req.query.searchText == ''){
-    res.send({ cropsAsOfDay(date) });
+  var searchText = req.query.searchText;
+
+  mongoose.connect("mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app", function(err, db) {
+    if (err) throw err;
+    console.log("Connected!");
+
+    //Plant.find().then(response => res.json(response));//.where(date).gt('plantStart').lt('plantEnd');
+  //return queryDatabase(sql);
+})
+
+  console.log(req.query.searchType);
+  if(!searchText || searchText === ''){
+    var date = new Date();
+    console.log(date);
+    Plant.find()//.where(date).gt('plantStart').lt('plantEnd')
+      .then(response => {
+      console.log(response);
+      res.json(response);
+    }).catch(err => console.error(err));
   }
-  if(req.query.searchType == 'date'){
-    res.send({ cropsAsOfDay(searchText) });
+  else if(req.query.searchType === 'date'){
+    console.log("Searching by date");
+    res.send(cropsAsOfDay(searchText));
   } else {
-    res.send({ cropsByName(searchText) });
+    console.log("Searching by crop");
+    res.send(cropsByName(searchText));
   }
 });
 
