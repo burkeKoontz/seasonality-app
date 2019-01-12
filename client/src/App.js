@@ -3,6 +3,11 @@ import './App.css';
 import ListItem from './ListItem.js';
 import SproutLogo from './images/sprout-logo.png'
 import Bell from './images/bell.png'
+import {
+    Route,
+    Link
+} from 'react-router-dom'
+import Announce from './announce/Announce.js';
 
 class App extends Component {
   state = {
@@ -73,6 +78,11 @@ class App extends Component {
           <button className="submit-button" type="submit">Submit</button>
         </form>
         <p>{this.state.responseToPost}</p>
+
+      <div className="App-intro">
+          <Route path="/announce" component={Announce}/>
+      </div>
+
       </div>
     );
   }
