@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import ListItem from './ListItem.js';
+import SproutLogo from './images/sprout-logo.png'
+import Bell from './images/bell.png'
 
 class App extends Component {
   state = {
@@ -48,7 +50,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Seedsonal Planner</h1>
+          <img src={SproutLogo} className="logo" />
+          <h1 className="title">Seedsonal Planner</h1>
+          <img src={Bell} className="bell" />
+          <a href="/admin" className="admin-link">Admin</a>
         </header>
         <ul className="to-do-list">
        {this.state.list.length > 0 && this.state.list.map((listItem, index) => (
