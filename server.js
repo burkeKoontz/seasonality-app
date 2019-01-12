@@ -50,24 +50,30 @@ function cropsByName(crop) {
 
 // API calls
 app.get('/api/home', (req, res) => {
-  var searchText = req.query.searchText;
+  let searchText = req.query.searchText;
+  let date = req.query.date;
 
-  mongoose.connect('mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app', function(err, db) {
-    if (err) throw err;
-    console.log('Connected!');
 
-    //Plant.find().then(response => res.json(response));//.where(date).gt('plantStart').lt('plantEnd');
-  //return queryDatabase(sql);
-  });
-
-  // //{region: "NA",sector:"Some Sector"}
-
-  console.log(req.query.searchType);
-  if(!searchText || searchText === ''){
-    var date = 8.5;
-    console.log(date);
-    // date should be less th
-    // { plantStart: { $gt: 20 } }
+  if (searchText) {
+    Plant.find({name: searchText})
+      .then(response => {
+        console.log(response);
+        res.json(response);
+      })
+      .catch(err => console.error(err));
+  } else if (date) {
+    Plant.find({$and : [{plantStart: { $lte: date }}, {plantEnd: { $gte: date }}]})
+      .then(response => {
+        console.log(response);
+        res.json(response);
+      })
+      .catch(err => console.error(err));
+  } else {
+    let today = new Date();
+    date = today.getMonth() + 1;
+    let decimal = today.getDate();
+    decimal = decimal / 30;
+    date = date + decimal;
     Plant.find({$and : [{plantStart: { $lte: date }}, {plantEnd: { $gte: date }}]})
       .then(response => {
         console.log(response);
@@ -75,13 +81,7 @@ app.get('/api/home', (req, res) => {
       })
       .catch(err => console.error(err));
   }
-  else if(req.query.searchType === 'date'){
-    console.log('Searching by date');
-    res.send(cropsAsOfDay(searchText));
-  } else {
-    console.log('Searching by crop');
-    res.send(cropsByName(searchText));
-  }
+
 });
 
 app.post('/api/addItem', (req, res) => {
