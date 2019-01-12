@@ -22,44 +22,60 @@ function queryDatabase(sql) {
 
     sql.exec(function (err, plants) {
       if (err) throw err;
+      console.log(plants);
     });
   });
 }
 
 function cropsAsOfDay(date) {
-  let sql = Plant.find().where(date).gt('plantStart').lt('plantEnd');
-  return queryDatabase(sql);
-}
+  mongoose.connect('mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app', function(err, db) {
+    if (err) throw err;
+    console.log('Connected!');
 
+    Plant.find().then(response => res.json(response));//.where(date).gt('plantStart').lt('plantEnd');
+  //return queryDatabase(sql);
+  });}
 
 function cropsByName(crop) {
   let sql = Plant.find({ 'name': /${crop}/i });
   return queryDatabase(sql);
 }
 
-
 // API calls
-// possible calls
-// /api/home?date=&crop=broccoli
-// /api/home?date=11031994&crop=
-// /api/home?date=&crop=
 app.get('/api/home', (req, res) => {
-  var date = new Date();
-  // if there's search
-  if(req.query.searchText === ''){
-    res.send(cropsAsOfDay(date));
+  var searchText = req.query.searchText;
+
+  mongoose.connect('mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app', function(err, db) {
+    if (err) throw err;
+    console.log('Connected!');
+
+    //Plant.find().then(response => res.json(response));//.where(date).gt('plantStart').lt('plantEnd');
+  //return queryDatabase(sql);
+  });
+
+  console.log(req.query.searchType);
+  if(!searchText || searchText === ''){
+    var date = new Date();
+    console.log(date);
+    Plant.find()//.where(date).gt('plantStart').lt('plantEnd')
+      .then(response => {
+        console.log(response);
+        res.json(response);
+      }).catch(err => console.error(err));
   }
-  if(req.query.searchType === 'date'){
-    res.send(cropsAsOfDay(req.query.searchText));
+  else if(req.query.searchType === 'date'){
+    console.log('Searching by date');
+    res.send(cropsAsOfDay(searchText));
   } else {
-    res.send(cropsByName(req.query.searchText));
+    console.log('Searching by crop');
+    res.send(cropsByName(searchText));
   }
 });
 
 app.post('/api/addItem', (req, res) => {
   // displays in the terminal
   console.log(req.body);
-  // crops.push(req.body.post);
+  crops.push(req.body.post);
   res.send('Item added!');
 });
 

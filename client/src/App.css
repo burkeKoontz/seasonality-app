@@ -19,29 +19,22 @@
   justify-content: flex-start;
 }
 
+.menu {
+  justify-content: flex-end;
+  display: flex;
+  align-items: center;
+}
+
 .bell {
   height: 25px;
   width: auto;
-  /* justify-content: flex-end; */
+  margin-right: 10px;
 }
 
 .admin-link {
   text-decoration: none;
-  justify-content: flex-end;
   font-size: 18px;
+  color: inherit;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-.to-do-list {
-  max-width: 850px;
-  margin: 40px auto;
-  text-align: left;
-}
-
-.to-do-list li {
-  margin: 8px 0;
-}
 
