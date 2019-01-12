@@ -5,12 +5,14 @@ import SproutLogo from './images/sprout-logo.png'
 import Bell from './images/bell.png'
 
 class App extends Component {
-  state = {
-    list: '',
-    post: '',
-    responseToPost: ''
-  };
-
+  constructor(props) {
+    state = {
+      list: '',
+      post: '',
+      responseToPost: ''
+    };
+  }
+  
   componentDidMount() {
     this.updateTodoList();
   }
@@ -21,14 +23,14 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-  callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
+  // callApi = async () => {
+  //   const response = await fetch('/api/hello');
+  //   const body = await response.json();
 
-    if (response.status !== 200) throw Error(body.message);
+  //   if (response.status !== 200) throw Error(body.message);
 
-    return body;
-  };
+  //   return body;
+  // };
 
   handleSubmit = async e => {
     e.preventDefault();
