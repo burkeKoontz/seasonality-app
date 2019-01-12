@@ -17,40 +17,24 @@ function queryDatabase(sql) {
   mongoose.connect('mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app', function(err, db) {
     if (err) throw err;
     console.log('Connected!');
-
+    
     sql.exec(function (err, plants) {
       if (err) throw err;
     });
   });
 }
-// queryDatabase(function(sql) {
-//   mongoose.connect("mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app", function(err, db) {
-//     if (err) throw err;
-//     console.log("Connected!");
 
-//     sql.exec(function (err, plants) {
-//       if (err) throw err;
-//     })
-//   });
-// });
 function cropsAsOfDay(date) {
   let sql = Plant.find().where(date).gt('plantStart').lt('plantEnd');
   return queryDatabase(sql);
 }
-// cropsAsOfDay(function(date) {
-//   sql = Plant.find().where(date).gt('plantStart').lt('plantEnd');
-//   return queryDatabase(sql);
-// });
+
 
 function cropsByName(crop) {
   let sql = Plant.find({ 'name': /${crop}/i });
   return queryDatabase(sql);
 }
 
-// cropsByName(function(crop) {
-//   sql = Plant.find({ "name": /${crop}/i });
-//   return queryDatabase(sql);
-// });
 
 // API calls
 // possible calls
