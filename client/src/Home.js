@@ -3,7 +3,9 @@ import './App.css';
 
 class Home extends Component {
 
-  componentDidMount() {}
+  componentDidMount() {
+    
+  }
 
   render() {
     return (
