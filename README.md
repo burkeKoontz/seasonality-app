@@ -6,7 +6,10 @@ As part of the We Code for Good 2019 Hackathon event, our team choose to build a
 
 This app is a Seedsonal planner that is an app that lets users search by date and crop type to find details on what to plant and when to plant it. 
 
-****Notifications!** One benefit of this app is the ability of a Growing Gardens admin to set up custom browser push notifications. 
+****Notifications!** One benefit of this app is the ability of a Growing Gardens admin to set up custom browser push notifications.
+
+# Team
+- Brianna Shade - team lead, github: 
 
 ## Project structure
 
