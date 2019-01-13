@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import './App.css';
-import Announce from './announce/Announce.js';
-import Home from './Home.js';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import SproutLogo from './images/sprout-logo.png';
-import Bell from './images/bell.png';
+import React, { Component } from 'react'
+import './App.css'
+import Announce from './announce/Announce.js'
+import Home from './Home.js'
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import SproutLogo from './images/sprout-logo.png'
+import Bell from './images/bell.png'
+import Banner from './banner'
 
 class App extends Component {
 
@@ -16,6 +17,7 @@ class App extends Component {
     return (
         <Router>
             <div className="App">
+                <Banner />
                 <header className="App-header">
                     <img src={SproutLogo} className="logo" />
                     <h1 className="title">Seedsonal Planner</h1>

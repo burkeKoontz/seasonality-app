@@ -22,6 +22,8 @@ app.use(
 
 let mongoose = require('mongoose');
 
+let fetch = require('node-fetch');
+
 function queryDatabase(sql) {
   mongoose.connect('mongodb://admin:plantsAREveryCOOL333@ds155577.mlab.com:55577/seasonality-plants-app', function(err, db) {
     if (err) throw err;
@@ -91,7 +93,7 @@ app.post('/api/addItem', (req, res) => {
   res.send('Item added!');
 });
 
-function runServer(port = PORT) {
+function runServer() {
   const server = app
     .listen(port, () => {
       console.info(`App listening on port ${server.address().port}`);
@@ -101,6 +103,50 @@ function runServer(port = PORT) {
       console.error(err);
     });
 }
+
+app.post('/api/subtopic', (req, res) => {
+    let token = req.body.token;
+    let resp = fetch('https://iid.googleapis.com/iid/v1/' + token + '/rel/topics/seedsonality', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'key=AAAAwDyW1Bo:APA91bHQbOnDKK9GTX0xd8-3fiEmZXiiWGib6-uh_sfasgIZ7J3vRn6QoaDiMvGT40eRUQydmtJpbOT2dCjjej6cQX42oovf4yYfWOkUdHgnlBiqxw4h8tA5sNI1YW8Qj8ZrVB_ailn1'
+        }
+    });
+
+    resp.then(function(result){
+        console.log(result);
+    });
+
+    res.send('Subbed!');
+});
+
+app.post('/api/announce', (req, res) => {
+    let token = req.body.token;
+    let resp = fetch('https://fcm.googleapis.com/fcm/send', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'key=AAAAwDyW1Bo:APA91bHQbOnDKK9GTX0xd8-3fiEmZXiiWGib6-uh_sfasgIZ7J3vRn6QoaDiMvGT40eRUQydmtJpbOT2dCjjej6cQX42oovf4yYfWOkUdHgnlBiqxw4h8tA5sNI1YW8Qj8ZrVB_ailn1'
+        },
+        body: "{\n" +
+            "    \"notification\": {\n" +
+            "        \"title\": \"Seedsonality\",\n" +
+            "        \"body\": \"" + req.body.message + "\",\n" +
+            "        \"click_action\": \"http://localhost:3000/\",\n" +
+            "        \"icon\": \"http://url-to-an-icon/icon.png\"\n" +
+            "    },\n" +
+            "    \"to\": \"/topics/seedsonality\"\n" +
+            "}"
+        });
+
+    resp.then(function(result){
+        console.log(result);
+    });
+
+    res.send('Announce yo!');
+});
 
 if (require.main === module) {
   dbConnect();

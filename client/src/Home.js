@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './Home.css';
 import {API_BASE_URL} from './config';
 
 class Home extends Component {

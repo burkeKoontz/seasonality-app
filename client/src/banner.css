@@ -1,0 +1,16 @@
+#banner {
+    display: none;
+}
+.updateAlert {
+    background: #fb4;
+    padding: 1em;
+    border: 1px solid rgb(155, 87, 0);
+    border-top: 0;
+    border-radius: 0 0 0.5em 0.5em;
+    box-shadow: 0 0.2em 0.2em rgba(155, 87, 0, 0.6);
+  }
+
+  .updateAlert-link {
+    font-weight: bold;
+    color: inherit; /* Since it links to the current page, it always looks :visited */
+  }
