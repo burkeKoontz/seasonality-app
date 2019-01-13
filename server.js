@@ -149,8 +149,9 @@ app.post('/api/announce', (req, res) => {
 });
 
 if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, 'client/build')));
+}
 
 app.post('/api/subtopic', (req, res) => {
     let token = req.body.token;
